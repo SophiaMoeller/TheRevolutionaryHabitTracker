@@ -16,46 +16,33 @@ def calculate_current_streak(db, habit_name):
     completion_dates = get_date_for_habit(db, habit_name)
     completion_dates.reverse()
     periodicity = get_periodicity(db, habit_name)
-    print(periodicity)
     current_streak = 0
 
     for i in range(len(completion_dates) - 1):
         if periodicity == 'Daily':
             date1 = datetime.strptime(completion_dates[i], '%Y-%m-%d')
-            print(date1)
             date2 = datetime.strptime(completion_dates[i + 1], '%Y-%m-%d')
-            print(date2)
             delta = timedelta(days=1)
-            print(delta)
             if date2 - date1 == delta:
                 current_streak += 1
-                print(current_streak)
             else:
                 current_streak = 0
                 print('The current streak has been reset')
         elif periodicity == 'Weekly':
             date1 = datetime.strptime(completion_dates[i], '%Y-%m-%d')
-            print(date1)
             date2 = datetime.strptime(completion_dates[i + 1], '%Y-%m-%d')
-            print(date2)
             delta = timedelta(weeks=1)
-            print(delta)
             if date2 - date1 == delta:
                 current_streak += 1
-                print(current_streak)
             else:
                 current_streak = 0
                 print('The current streak has been reset')
         elif periodicity == 'Monthly':
             date1 = datetime.strptime(completion_dates[i], '%Y-%m-%d')
-            print(date1)
             date2 = datetime.strptime(completion_dates[i + 1], '%Y-%m-%d')
-            print(date2)
             delta = timedelta(days=30)
-            print(delta)
             if date2 - date1 == delta:
                 current_streak += 1
-                print(current_streak)
             else:
                 current_streak = 0
                 print('The current streak has been reset')
@@ -73,19 +60,15 @@ def calculate_longest_streak(db, habit_name):
     completion_dates = get_date_for_habit(db, habit_name)
     completion_dates.reverse()
     periodicity = get_periodicity(db, habit_name)
-    print(periodicity)
     longest_streak = 0
     current_streak = 0
 
     for i in range(len(completion_dates) - 1):
         date1 = datetime.strptime(completion_dates[i], '%Y-%m-%d')
-        print(date1)
         date2 = datetime.strptime(completion_dates[i + 1], '%Y-%m-%d')
-        print(date2)
 
         if periodicity == 'Daily':
             delta = timedelta(days=1)
-            print(delta)
         elif periodicity == 'Weekly':
             delta = timedelta(weeks=1)
         elif periodicity == 'Monthly':
@@ -253,9 +236,8 @@ def habit_with_longest_current_streak(db):
         print("No habits found.")
     else:
         habit_with_max_current_streak = max(habit_list, key=lambda habit: habit['current streak'])
-        print(
-            f"Habit with the longest current streak ({habit_with_max_current_streak['current streak']}): "
-            f"{habit_with_max_current_streak['habit name']}")
+        print(f"Habit with the longest current streak ({habit_with_max_current_streak['current streak']}): "
+              f"{habit_with_max_current_streak['habit name']}")
 
 
 def habit_with_longest_streak(db):
@@ -271,6 +253,5 @@ def habit_with_longest_streak(db):
         print("No habits found.")
     else:
         habit_with_max_longest_streak = max(habit_list, key=lambda habit: habit['longest streak'])
-        print(
-            f"Habit with the longest streak ({habit_with_max_longest_streak['longest streak']}): "
-            f"{habit_with_max_longest_streak['habit name']}")
+        print(f"Habit with the longest streak ({habit_with_max_longest_streak['longest streak']}): "
+              f"{habit_with_max_longest_streak['habit name']}")

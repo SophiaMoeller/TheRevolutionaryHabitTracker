@@ -61,9 +61,9 @@ def add_habit(db, habit_name, description, periodicity, habit_group, creation_da
     existing_habit = cur.fetchone()
 
     if existing_habit:
-        print(f"The habit with the name '{habit_name}' already exists.")
+        raise Exception(f"The habit with the name '{habit_name}' already exists.")
     else:
-        cur.execute("INSERT INTO habit VALUES(?,?,?,?,?,?,?)",
+        cur.execute("INSERT INTO habit VALUES (?, ?, ?, ?, ?, ?, ?)",
                     (habit_name, description, periodicity, habit_group, creation_date, current_streak, longest_streak))
         db.commit()
 
@@ -138,8 +138,12 @@ def get_periodicity(db, habit_name):
     """
     cur = db.cursor()
     cur.execute("SELECT periodicity FROM habit WHERE habit_name=?", (habit_name,))
-    habit_periodicity = cur.fetchone()[0]
-    return habit_periodicity
+    habit_periodicity_row = cur.fetchone()
+    if habit_periodicity_row:
+        habit_periodicity = habit_periodicity_row[0]
+        return habit_periodicity
+    else:
+        return None
 
 
 def get_description(db, habit_name):
@@ -153,8 +157,12 @@ def get_description(db, habit_name):
     """
     cur = db.cursor()
     cur.execute("SELECT description FROM habit WHERE habit_name=?", (habit_name,))
-    habit_description = cur.fetchone()[0]
-    return habit_description
+    habit_description_row = cur.fetchone()
+    if habit_description_row:
+        habit_description = habit_description_row[0]
+        return habit_description
+    else:
+        return None
 
 
 def get_habit_group(db, habit_name):
@@ -168,8 +176,12 @@ def get_habit_group(db, habit_name):
     """
     cur = db.cursor()
     cur.execute("SELECT habit_group FROM habit WHERE habit_name=?", (habit_name,))
-    habit_group = cur.fetchone()[0]
-    return habit_group
+    habit_group_row = cur.fetchone()
+    if habit_group_row:
+        habit_group = habit_group_row[0]
+        return habit_group
+    else:
+        return None
 
 
 def get_creation_date(db, habit_name):
@@ -183,8 +195,12 @@ def get_creation_date(db, habit_name):
     """
     cur = db.cursor()
     cur.execute("SELECT creation_date FROM habit WHERE habit_name=?", (habit_name,))
-    creation_date = cur.fetchone()[0]
-    return creation_date
+    creation_date_row = cur.fetchone()
+    if creation_date_row:
+        creation_date = creation_date_row[0]
+        return creation_date
+    else:
+        return None
 
 
 def get_current_streak(db, habit_name):
@@ -198,8 +214,12 @@ def get_current_streak(db, habit_name):
     """
     cur = db.cursor()
     cur.execute("SELECT current_streak FROM habit WHERE habit_name=?", (habit_name,))
-    current_streak = cur.fetchone()[0]
-    return current_streak
+    current_streak_row = cur.fetchone()
+    if current_streak_row:
+        current_streak = current_streak_row[0]
+        return current_streak
+    else:
+        return None
 
 
 def get_longest_streak(db, habit_name):
@@ -213,8 +233,12 @@ def get_longest_streak(db, habit_name):
     """
     cur = db.cursor()
     cur.execute("SELECT longest_streak FROM habit WHERE habit_name=?", (habit_name,))
-    longest_streak = cur.fetchone()[0]
-    return longest_streak
+    longest_streak_row = cur.fetchone()
+    if longest_streak_row:
+        longest_streak = longest_streak_row[0]
+        return longest_streak
+    else:
+        return None
 
 
 def get_all_habits(db):

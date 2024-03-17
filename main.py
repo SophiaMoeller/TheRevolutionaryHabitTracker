@@ -41,11 +41,11 @@ def cli():
             new_habit = Habit(name, desc, periodicity, habit_group, creation_date, current_streak, longest_streak)
             new_habit.store_habit(db)
             print("Your new habit has been created.")
-            sleep(3)
+            sleep(2)
 
         elif choice_action == "Increment habit":
             habit_name = questionary.text("Choose a habit to check off:").ask()
-            if None == habit_exists(db, habit_name):
+            if habit_exists(db, habit_name) == None:
                 print("This habit does not exist.")
             else:
                 desc = get_description(db, habit_name)
@@ -59,7 +59,7 @@ def cli():
                 chosen_habit.complete_habit()
                 increment_habit(db, habit_name)
                 print(f"{habit_name} has been incremented.")
-                sleep(3)
+                sleep(2)
 
         elif choice_action == "Analyze habit":
             stop = False
@@ -88,7 +88,7 @@ def cli():
                         print(f"Your current streak for {habit_name} is {current_streak}")
                         update_current_streak(db, current_streak, habit_name)
                         print(f"Current streak for habit '{habit_name}' has been updated in the database.")
-                    sleep(3)
+                    sleep(2)
 
                 if choice_analysis == "Calculate longest streak for specific habit":
                     habit_name = questionary.text("Choose a habit to calculate longest streak:").ask()
@@ -99,7 +99,7 @@ def cli():
                         print(f"Your longest streak for {habit_name} is {longest_streak}")
                         update_longest_streak(db, longest_streak, habit_name)
                         print(f"Longest streak for habit '{habit_name}' has been updated in the database.")
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Get a table with all habits":
                     all_habits = get_all_habits(db)
@@ -107,7 +107,7 @@ def cli():
                         print("There are no existing habits.")
                     else:
                         table_all_habits(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Get a list of habits sorted by alphabet":
                     user_habits = get_all_habits(db)
@@ -115,7 +115,7 @@ def cli():
                         print("There are no existing habits.")
                     else:
                         table_sorted_alphabet(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Get a list of habits sorted by periodicity":
                     user_habits = get_all_habits(db)
@@ -123,7 +123,7 @@ def cli():
                         print("There are no existing habits.")
                     else:
                         table_sorted_periodicity(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Get a list of habits sorted by current streak":
                     user_habits = get_all_habits(db)
@@ -131,7 +131,7 @@ def cli():
                         print("There are no existing habits.")
                     else:
                         table_sorted_current_streak(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Get a list of habits sorted by longest streak":
                     user_habits = get_all_habits(db)
@@ -139,7 +139,7 @@ def cli():
                         print("There are no existing habits.")
                     else:
                         table_sorted_longest_streak(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Display all completion dates for a habit":
                     habit_name = questionary.text("Choose a habit for which you want to "
@@ -148,28 +148,28 @@ def cli():
                         print("This habit does not exist.")
                     else:
                         table_completion_dates(db, habit_name)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Display habits with certain periodicity":
                     display_habit_by_periodicity(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Display habits in certain groups":
                     display_habit_by_group(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Display habit with the longest current streak among all habits":
                     habit_with_longest_current_streak(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Display habit with the longest streak among all habits":
                     habit_with_longest_streak(db)
-                    sleep(3)
+                    sleep(2)
 
                 elif choice_analysis == "Exit program":
                     stop = True
                     print("Thank you for using the revolutionary habit tracker!")
-                    sleep(3)
+                    sleep(2)
 
         elif choice_action == "Delete a habit":
             habit_to_delete = questionary.text("Which habit do you want to delete?").ask()
@@ -182,12 +182,12 @@ def cli():
                     delete_habit_from_db(db, habit_to_delete)
                 else:
                     print("Deletion canceled. The habit was not deleted.")
-            sleep(3)
+            sleep(2)
 
         else:
             stop = True
             print("Thank you for using the revolutionary habit tracker!")
-            sleep(3)
+            sleep(2)
 
 
 if __name__ == '__main__':

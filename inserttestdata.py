@@ -2,10 +2,11 @@ import sqlite3
 
 db = sqlite3.connect("main.db")
 cursor = db.cursor()
-data1 = [('Running', 'Go for a 5km run', 'Daily', 'Sports', '2024-02-18', 0, 0),
-         ('Cleaning', 'Vacuum and clean the apartment', 'Weekly', 'Living', '2024-02-17', 0, 0),
-         ('Drink enough', 'Drink at least 2 liters of water a day', 'Daily', 'Health', '2024-02-16', 0, 0),
-         ('Clean windows', 'Clean all the windows in one room', 'Monthly', 'Living', '2024-02-15', 0, 0)
+data1 = [('Running', 'Go for a 5km run', 'Daily', 'Sports', '2024-01-01', 0, 0),
+         ('Cleaning', 'Vacuum and clean the apartment', 'Weekly', 'Living', '2024-01-01', 0, 0),
+         ('Drink enough', 'Drink at least 2 liters of water a day', 'Daily', 'Health', '2024-01-01', 0, 0),
+         ('Clean windows', 'Clean all the windows in one room', 'Monthly', 'Living', '2024-01-01', 0, 0),
+         ('Meal prep', 'Prepare healthy delicious meals for the following week', 'Weekly', 'Health', '2024-01-01', 0, 0)
          ]
 sql_query = ("INSERT INTO habit (habit_name, description, periodicity, habit_group, creation_date, current_streak,"
              " longest_streak) Values (?,?,?,?,?,?,?)")
@@ -83,10 +84,19 @@ data2 = [
     ('Drink enough', '2024-01-02'),
     ('Drink enough', '2024-01-01'),
     ('Clean windows', '2024-01-01'),
-    ('Clean windows', '2024-01-31')
+    ('Clean windows', '2024-01-31'),
+    ('Meal prep', '2024-01-01'),
+    ('Meal prep', '2024-01-08'),
+    ('Meal prep', '2024-01-15'),
+    ('Meal prep', '2024-01-22'),
+    ('Meal prep', '2024-01-29'),
+    ('Meal prep', '2024-02-05'),
+    ('Meal prep', '2024-02-12'),
+    ('Meal prep', '2024-02-19'),
+    ('Meal prep', '2024-02-26'),
+    ('Meal prep', '2024-03-04'),
+    ('Meal prep', '2024-03-11')
 ]
 sql_query = "INSERT INTO completion_dates (habit_name, event_date) Values (?, ?)"
 cursor.executemany(sql_query, data2)
 db.commit()
-
-
